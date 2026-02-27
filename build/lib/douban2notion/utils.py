@@ -334,6 +334,7 @@ def get_weread_url(book_id):
 def str_to_timestamp(date):
     if date == None:
         return 0
+        print("date:"{date})
         try:
             dt = pendulum.parse(date)
         except ParserError:
