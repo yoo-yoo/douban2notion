@@ -332,15 +332,15 @@ def get_weread_url(book_id):
     return f"https://weread.qq.com/web/reader/{calculate_book_str_id(book_id)}"
 
 def str_to_timestamp(date):
-    if date == None:
+    if not date:
         return 0
-        print("date:"{date})
-        try:
-            dt = pendulum.parse(date)
-        except ParserError:
-            print("Error: "{date})
-    # 获取时间戳
-    return int(dt.timestamp())
+    try:
+        dt = pendulum.parse(date)
+        # 获取时间戳
+        return int(dt.timestamp())
+    except (TypeError, ValueError, pendulum.parsing.exceptions.ParserError):
+        print(f"Warning: unable to parse date {date!r}; using 0 instead")
+        return 0
 
 upload_url = 'https://wereadassets.malinkang.com/'
 
